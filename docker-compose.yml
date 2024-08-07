@@ -1,0 +1,49 @@
+services:
+  libs: # builds the libraries on `docker compose build`, the container will copy them out to `/libs`
+    build: ./build/lib-builder
+    volumes:
+      - "./libs:/libs"
+    restart: no
+  updater: # updates the game files 
+    container_name: headless-updater
+    build: ./build/updater
+    env_file: .env
+    volumes:
+      - "./headless:/app/headless:rw"
+      - "./libs:/app/libs:ro"
+    restart: no
+    depends_on:
+      libs:
+        condition: service_completed_successfully
+        required: false
+  headless:
+    container_name: resonite-headless
+    depends_on:
+      updater:
+        condition: service_completed_successfully
+        required: false
+        restart: true
+    build:
+      context: ./build/headless
+      dockerfile: Dockerfile.ubuntu
+    env_file: .env
+    tty: true
+    stdin_open: true
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "./config:/Config:rw"
+      - "./logs:/Logs:rw"
+      - "./headless/Headless:/Headless:rw"
+      - "./mods/Libraries:/Headless/Libraries"
+      - "./mods/rml_libs:/Headless/rml_libs"
+      - "./mods/rml_mods:/Headless/rml_mods"
+      - "./mods/rml_config:/Headless/rml_config:rw"
+      - "./data:/db:rw"
+    restart: unless-stopped
+    ports:
+      - 5454:5454
+      - 5455:5455
+      - 5456:5456
+      - 5457:5457
+      - 5458:5458
+      - 5459:5459

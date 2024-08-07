@@ -1,0 +1,7 @@
+config/Config.json
+data
+libs
+headless
+mods
+logs
+.env
