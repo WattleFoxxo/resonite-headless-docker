@@ -1,0 +1,16 @@
+FROM mcr.microsoft.com/dotnet/runtime:8.0 AS base
+
+
+RUN apt-get update -y
+RUN apt-get install -y libfreetype6
+
+#RUN cp -f /usr/lib/aarch64-linux-gnu/libfreetype.so.6 /Headless/Headless/net8.0/libfreetype6.so
+
+COPY . .
+
+RUN mkdir /Headless
+WORKDIR /Headless
+
+ENTRYPOINT ["dotnet"]
+CMD ["/Headless/Resonite.dll", "-HeadlessConfig", "/Config/Config.json", "-LoadAssembly", "Libraries/ResoniteModLoader.dll"]
+
