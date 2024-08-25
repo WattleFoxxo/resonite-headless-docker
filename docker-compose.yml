@@ -38,7 +38,7 @@ services:
       - "./mods/rml_mods:/Headless/rml_mods"
       - "./mods/rml_config:/Headless/rml_config:rw"
       - "./data/data:/db/data:rw"
-      - "./resonite/cache:/db/cache:rw"
+      - "./cache/cache:/db/cache:rw"
     restart: unless-stopped
     ports:
       - 5454:5454
