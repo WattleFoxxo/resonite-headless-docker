@@ -21,7 +21,6 @@ services:
     depends_on:
       updater:
         condition: service_completed_successfully
-        required: false
         restart: true
     build:
       context: ./build/headless
@@ -38,7 +37,8 @@ services:
       - "./mods/rml_libs:/Headless/rml_libs"
       - "./mods/rml_mods:/Headless/rml_mods"
       - "./mods/rml_config:/Headless/rml_config:rw"
-      - "./data:/db:rw"
+      - "./data/data:/db/data:rw"
+      - "./resonite/cache:/db/cache:rw"
     restart: unless-stopped
     ports:
       - 5454:5454
