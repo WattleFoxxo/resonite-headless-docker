@@ -11,3 +11,4 @@
 - `docker compose attach headless` - attach to the headless interactive console, detach with ^P ^Q (^C will stop the headless)
 - `docker compose restart` - update and restart the headless
 
+Tested on an Oracle Cloud Ampere A1 cloud VM, *should* work with other ARM machines - feel free to create an issue here or contact me on Discord (`adamski2003`) if you encounter any issues
