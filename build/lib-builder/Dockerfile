@@ -3,7 +3,7 @@ FROM debian AS builder
 WORKDIR /build
 
 RUN apt-get -y update
-RUN apt-get -y install git bc clang cmake autoconf make libtool libfreetype-dev bzip2 meson
+RUN apt-get -y install git bc clang cmake autoconf make libtool libfreetype-dev bzip2 meson libfreetype6
 
 COPY . .
 
@@ -16,7 +16,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS dotnet
 WORKDIR /build
 
 RUN apt-get -y update
-RUN apt-get -y install git bc clang cmake autoconf make libtool libfreetype-dev bzip2 meson
+RUN apt-get -y install git bc clang cmake autoconf make libtool libfreetype-dev bzip2 meson libfreetype6
 
 COPY . .
 
